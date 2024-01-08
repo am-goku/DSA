@@ -22,8 +22,25 @@ class Graph {
   }
 
 
-  ///heyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
+  bfs(startingVertex){
+    const visited = new Set();
+    const queue = [startingVertex];
 
+    while(queue.length > 0){
+      const current = queue.shift();
+      console.log(current);
+
+      const neighbors = this.adjacencyList.get(current);
+
+      neighbors.forEach((neighbor)=> {
+        if(!visited.has(neighbor)){
+          visited.add(neighbor);
+          queue.push(neighbor);
+        }
+      })
+    }
+
+  }
 
 
   dfsRec(startingVertex) {
@@ -47,8 +64,7 @@ class Graph {
 
 
     dfs(startingVertex);
-    const unvisited = this.adjacencyList.filter((adj) => {return !visited.has(adj)})
-    return [...result, ...unvisited];
+    return [...result];
   }
 
 }
@@ -82,4 +98,6 @@ graph.printGraph()
 
 
 console.log(graph.dfsRec(10));
+
+graph.bfs(10)
 
