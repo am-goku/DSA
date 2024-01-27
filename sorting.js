@@ -12,4 +12,4 @@ const num = [2,3,5,1,6,6,7];
 
 sort(num);
 
-console.log(num);
+console.log(num); 
