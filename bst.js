@@ -155,13 +155,11 @@ tree.insert(80)
 tree.insert(40);
 tree.insert(5);
 
-
 tree.inOrder()
 tree.preOrder()
 tree.postOrder();
 
 tree.deleteDuplicates() 
-
 
 tree.delete(40)
 
