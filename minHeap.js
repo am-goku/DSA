@@ -1,8 +1,16 @@
+/* The above class implements a min-heap data structure in JavaScript, allowing for the insertion of
+values, extraction of the minimum value, and maintaining the heap property. */
 class MinHeap{
+  /**
+   * The constructor function initializes an empty heap array.
+   */
   constructor(){
     this.heap = [];
   }
 
+  /* The `parentIndex(index)` function calculates the index of the parent node given the index of a
+  node in the heap. It uses the formula `(index-1)/2` and returns the result rounded down to the
+  nearest integer using `Math.floor()`. */
   parentIndex(index){
     return Math.floor((index-1)/2);
   }
@@ -16,6 +24,8 @@ class MinHeap{
   }
 
 
+  /* The `leftIndex(index)` function calculates the index of the left child node given the index of a
+  node in the heap. It uses the formula `2*index+1` to calculate the left child index. */
   leftIndex(index){
     return 2*index+1
   }
@@ -29,6 +39,8 @@ class MinHeap{
   }
 
 
+  /* The `rightIndex(index)` function calculates the index of the right child node given the index of a
+  node in the heap. It uses the formula `2*index+2` to calculate the right child index. */
   rightIndex(index){
     return 2*index+2
   }
@@ -41,18 +53,33 @@ class MinHeap{
     return this.rightIndex(index) < this.heap.length;
   }
 
+  /**
+   * The above function swaps two elements in an array.
+   * @param i - The parameter "i" represents the index of the first element in the heap that needs to
+   * be swapped.
+   * @param j - The parameter "j" represents the index of an element in the heap array.
+   */
   swap(i,j){
     [this.heap[i], this.heap[j]] = [this.heap[j], this.heap[i]];
   }
 
 
 
+  /**
+   * The insert function adds a value to the heap and then performs the heapifyUp operation to maintain
+   * the heap property.
+   * @param value - The value parameter represents the value that you want to insert into the heap.
+   */
   insert(value){
     this.heap.push(value);
     this.heapifyUp()
   }
 
 
+  /**
+   * The function `heapifyUp` is used to maintain the heap property by swapping elements upwards until
+   * the parent-child relationship is satisfied.
+   */
   heapifyUp(){
     let index = this.heap.length-1;
     let parentIndex = this.parentIndex(index)
@@ -65,6 +92,13 @@ class MinHeap{
   }
 
 
+  /**
+   * The function heapifyDown is used to maintain the min-heap property by recursively swapping
+   * elements to their correct positions starting from a given index.
+   * @param index - The index parameter represents the index of the element in the heap that needs to
+   * be heapified down.
+   * @returns The function does not explicitly return anything.
+   */
   heapifyDown(index){
     const leftIndex = this.leftIndex(index);
     const rightIndex = this.rightIndex(index);
@@ -90,6 +124,10 @@ class MinHeap{
   }
 
 
+  /**
+   * The function `extractMin` removes and returns the minimum element from a heap data structure.
+   * @returns The minimum value from the heap is being returned.
+   */
   extractMin(){
 
     if(this.heap.length === 0) return null;
@@ -108,6 +146,10 @@ class MinHeap{
 
 }
 
+/* The code is creating a new instance of the `MinHeap` class called `heap`. It then inserts several
+values (3, 5, 10, 30, 20, 7, 8) into the heap using the `insert` method. After that, it calls the
+`extractMin` method to remove and return the minimum value from the heap. Finally, it logs the
+current state of the heap to the console using `console.log(heap.heap)`. */
 const heap = new MinHeap();
 
 heap.insert(3);
