@@ -1,149 +1,169 @@
-class TreeNode {
-  constructor(value) {
-    this.data = value;
+
+class treeNode {
+  constructor(value){
+    this.value = value;
     this.left = null;
     this.right = null;
   }
 }
 
-class BinaryTree {
-  constructor() {
+
+class BinaryTree{
+  constructor(){
     this.root = null;
   }
 
-  insert(value) {
-    const newNode = new TreeNode(value);
 
-    if (!this.root) {
+  insert(value){
+    const newNode = new treeNode(value);
+
+    if(!this.root){
       this.root = newNode;
       return;
     }
 
     let current = this.root;
 
-    while (current) {
-      if (current.data > value) {
-        if (current.left == null) {
-          current.left = newNode;
-          return;
+    while(current){
+      if(current.value > value){
+        if(!current.left){
+          current.left = newNode
+          break;
         }
-        current = current.left;
+        current = current.left
       } else {
-        if (current.right == null) {
+        if(!current.right){
           current.right = newNode;
-          return;
+          break;
         }
-        current = current.right;
+        current = current.right
       }
     }
   }
 
-  search(key) {
-    let current = this.root;
 
-    while (current) {
-      if (current.data === key) {
-        return true;
-      }
 
-      if (key < current.data) {
-        current = current.left;
-      } else {
-        current = current.right;
-      }
-    }
-
-    return false;
-  }
-
-  inOrder(node = this.root) {
-    if (node) {
+  inOrder(node = this.root){
+    if(node){
       this.inOrder(node.left);
-      console.log(node.data);
+      console.log(node.value);
       this.inOrder(node.right);
     }
   }
 
-  preOrder(node = this.root) {
-    if (node) {
-      console.log(node.data);
-      this.preOrder(node.left);
-      this.preOrder(node.right);
-    }
-  }
 
-  postOrder(node = this.root) {
-    if (node) {
+  postOrder(node = this.root){
+    if(node){
+      console.log(node.value);
       this.postOrder(node.left);
       this.postOrder(node.right);
-      console.log(node.data);
     }
   }
 
-  delete(key) {
-    this.root = this.deleteHelper(this.root, key);
+
+  preOrder(node = this.root){
+    if(node){
+      this.preOrder(node.left);
+      this.preOrder(node.right);
+      console.log(node.value);
+    }
   }
 
-  deleteHelper(root, key) {
-    if (root === null) {
-      return null;
+
+  delete(value){
+    this.root = this.deleteHelper(this.root, value);
+  }
+
+
+  deleteHelper(root, key){
+    if(!root){
+      return null
     }
 
-    if (root.data > key) {
+
+    if(key < root.value){
       root.left = this.deleteHelper(root.left, key);
-    } else if (root.data < key) {
+    } else if(key > root.value) {
       root.right = this.deleteHelper(root.right, key);
     } else {
-      if (root.left === null) {
-        return root.right;
-      } else if (root.right === null) {
-        return root.left;
-      }
+      if(!root.left) return root.right;
+      if(!root.right) return root.left;
 
-      const minNode = this.findMin(root.right);
-      root.data = minNode.data;
-      root.right = this.deleteHelper(root.right, root.data);
+      const min = this.findMin(root.left);
+
+      root.value = min.value;
+
+      root.left = this.deleteHelper(root.left, root.value)
+
     }
     return root;
   }
 
-  findMin(node) {
-    while (node.left) {
-      node = node.left;
+
+  findMin(node){
+    while(node.left){
+      node = node.left
     }
 
     return node;
   }
 
-  deleteDuplicates() {
-    // const dups = []
-    const dups = this.findDups();
 
-    dups.forEach((i) => {
-      this.root = this.deleteHelper(this.root, i);
-    });
-  }
+  search(key) {
+    let current = this.root;
 
-  findDups() {
-    const visited = new Set(),
-      dups = [];
+    while(current){
+      if(current.value === key) return true;
 
-    const travel = (node) => {
-      if (node) {
-        if (visited.has(node.data)) {
-          dups.push(node.data);
-        } else {
-          visited.add(node.data);
-        }
-
-        travel(node.left);
-        travel(node.right);
+      if (current.value > key) {
+        current = current.left;
+      } else {
+        current = current.right;
       }
-    };
-    travel(this.root);
-    return dups;
+    }
+
+    return false
   }
+
+
+  deleteDuplicates(){
+    const data = [], duplicates = [];
+
+    this.findDuplicates(duplicates, data);
+
+    duplicates.forEach(key => {
+      this.root = this.deleteHelper(this.root, key)
+    })
+  }
+
+
+  findDuplicates(duplicates, data, node = this.root){
+    if(node){
+      this.findDuplicates(duplicates, data, node.left);
+      this.findDuplicates(duplicates, data, node.right);
+
+      if(data.includes(node.value)){
+        duplicates.push(node.value)
+      } else {
+        data.push(node.value)
+      }
+
+      return
+    }
+  }
+
+  findHeight(root = this.root) {
+    if(!root) return -1
+
+    const leftHeight = this.findHeight(root.left);
+    const rightHeight = this.findHeight(root.right);
+
+    return Math.max(leftHeight, rightHeight)+1;
+  }
+
 }
+
+
 
 const tree = new BinaryTree();
 
@@ -151,7 +171,9 @@ tree.insert(10);
 tree.insert(5);
 tree.insert(40);
 tree.insert(20);
+tree.insert(20);
 tree.insert(80)
+tree.insert(40);
 tree.insert(40);
 tree.insert(5);
 
@@ -162,6 +184,8 @@ tree.postOrder();
 tree.deleteDuplicates() 
 
 tree.delete(40)
+
+console.log("Height og the tree is: ", tree.findHeight())
 
 console.log(tree.search(10), tree.search(100));
 
