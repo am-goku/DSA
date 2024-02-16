@@ -81,9 +81,8 @@ class MinHeap{
     return this.heap[this.rightIndex(index)]
   }
 
-  hasRight(index){
-    return this.rightIndex(index) < this.heap.length;
-  }
+  
+  
 
   /**
    * The above function swaps two elements in an array.
