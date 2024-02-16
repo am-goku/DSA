@@ -61,7 +61,7 @@ class MinHeap{
    * @returns a boolean value indicating whether the left index is less than the length of the heap.
    */
   hasLeft(index){
-    return this.leftIndex < this.heap.length;
+    return this.leftIndex(index) < this.heap.length;
   }
 
 
@@ -79,6 +79,10 @@ class MinHeap{
    */
   getRight(index){
     return this.heap[this.rightIndex(index)]
+  }
+
+  hasRight(index){
+    return this.rightIndex(index) < this.heap.length;
   }
 
   
@@ -140,7 +144,7 @@ class MinHeap{
       minIndex = leftIndex
     }
 
-    if(this.hasRight && this.heap[minIndex] > this.heap[rightIndex]){
+    if(this.hasRight(index) && this.heap[minIndex] > this.heap[rightIndex]){
       minIndex = rightIndex
     }
 
