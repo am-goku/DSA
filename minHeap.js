@@ -8,17 +8,32 @@ class MinHeap{
     this.heap = [];
   }
 
-  /* The `parentIndex(index)` function calculates the index of the parent node given the index of a
-  node in the heap. It uses the formula `(index-1)/2` and returns the result rounded down to the
-  nearest integer using `Math.floor()`. */
+  
+  /**
+   * The function calculates the index of the parent node in a binary tree given the index of a child
+   * node.
+   * @param index - The index parameter represents the index of a node in a binary heap data structure.
+   * @returns The parent index of the given index.
+   */
   parentIndex(index){
     return Math.floor((index-1)/2);
   }
 
+  /**
+   * The function returns the parent element of a given index in a heap.
+   * @param index - The index parameter represents the index of a node in a heap data structure.
+   * @returns The parent element of the element at the given index in the heap.
+   */
   getParent(index){
     return this.heap[this.parentIndex(index)]
   }
 
+  /**
+   * The function checks if an element at a given index has a parent element.
+   * @param index - The index parameter represents the index of a node in a data structure, such as an
+   * array or a binary tree.
+   * @returns a boolean value indicating whether the given index has a parent or not.
+   */
   hasParent(index){
     return this.parentIndex(index) >= 0;
   }
@@ -30,10 +45,21 @@ class MinHeap{
     return 2*index+1
   }
 
+  /**
+   * The function returns the element at the left child index of a given index in a heap.
+   * @param index - The index parameter represents the index of a node in a binary heap.
+   * @returns The element at the left child index of the given index in the heap.
+   */
   getLeft(index){
     return this.heap[this.leftIndex(index)]
   }
 
+  /**
+   * The function checks if the left index is less than the length of the heap.
+   * @param index - The parameter "index" is not defined in the given code snippet. It seems like it is
+   * missing or not used in the provided function.
+   * @returns a boolean value indicating whether the left index is less than the length of the heap.
+   */
   hasLeft(index){
     return this.leftIndex < this.heap.length;
   }
@@ -45,6 +71,12 @@ class MinHeap{
     return 2*index+2
   }
 
+  /**
+   * The function returns the element at the right child index of a given index in a heap.
+   * @param index - The parameter "index" represents the index of a node in a binary heap data
+   * structure.
+   * @returns The element at the right child index of the heap at the given index.
+   */
   getRight(index){
     return this.heap[this.rightIndex(index)]
   }
