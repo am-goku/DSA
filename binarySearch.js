@@ -1,14 +1,3 @@
-/**
- * The binary_search function takes in a sorted array and a target value, and returns true if the
- * target value is found in the array, and false otherwise.
- * @param arr - The `arr` parameter is an array of numbers. In this case, it is the `sortedArray` which
- * contains the numbers [1, 12, 23, 34, 45, 56, 67, 78, 89, 90].
- * @param x - The parameter `x` represents the target value that we are searching for in the `arr`
- * array.
- * @returns The binary_search function returns a boolean value. It returns true if the target element
- * is found in the sorted array, and false otherwise.
- */
-
 const binary_search = (arr, x) => {
   try {
     const len = arr.length;
