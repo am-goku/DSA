@@ -251,3 +251,5 @@ console.log("Height og the tree is: ", tree.findHeight());
 console.log("Search results: ", tree.search(10), tree.search(100));
 
 console.log("Tree: ", tree.root);
+
+console.log(tree);
